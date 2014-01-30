@@ -184,6 +184,7 @@ class GoingPostalTest < MiniTest::Unit::TestCase
     assert_equal("K0H 9Z0", GoingPostal.format_postcode("k0h9z0", "CA"))
     assert_equal("K1A 0B1", GoingPostal.format_postcode("k 1 a 0 b 1", "CA"))
     assert_equal("H0H 0H0", GoingPostal.format_postcode("H0 H0 H0", "CA"))
+    assert_equal("G0A", GoingPostal.format_postcode("G0A", "CA"))
     
     assert_nil(GoingPostal.format_postcode("12345", "CA"))
   end

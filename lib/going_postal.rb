@@ -154,10 +154,11 @@ module GoingPostal
   
   def format_ca_postcode(string)
     forward_sort_area = string.to_s.upcase.delete(" \t\r\n")
-    local_delivery_unit = forward_sort_area.slice!(-3, 3)
+    local_delivery_unit = forward_sort_area.slice!(3, 3)
+    local_delivery_unit = nil if local_delivery_unit && local_delivery_unit.empty?
     if forward_sort_area =~ /^[A-CEGHJK-NPR-TVXY][0-9][A-CEGHJK-NPR-TV-Z]$/ &&
-      local_delivery_unit =~ /[0-9][A-CEGHJK-NPR-TV-Z][0-9]/
-      [forward_sort_area, local_delivery_unit].join(" ")
+      (local_delivery_unit.nil? || local_delivery_unit =~ /[0-9][A-CEGHJK-NPR-TV-Z][0-9]/)
+      [forward_sort_area, local_delivery_unit].compact.join(" ")
     end
   end
   
